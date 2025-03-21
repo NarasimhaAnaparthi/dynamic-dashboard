@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import WidgetMap from "./WidgetMap";
+import VanillaJsonEditor from "./VanillaJsonEditor";
 
 const initialJSON = {
   totalCols: 8,
-  totalRows: 12,
+  totalRows: 4,
   widgets: [
     {
       cols: 2,
@@ -46,11 +47,16 @@ const initialJSON = {
 const DynamicDashboard: React.FC = () => {
   const [dashboardJSON, setDashboardJSON] = useState(initialJSON);
 
-  const handleJSONChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    try {
-      setDashboardJSON(JSON.parse(event.target.value));
-    } catch (e) {
-      console.error("Invalid JSON", e);
+  const handleJSONChange = (data:any) => {
+    if ("json" in data && data.json) {
+      setDashboardJSON(data.json);
+    } else if ("text" in data && data.text) {
+      try {
+        const parsedData = JSON.parse(data.text);
+        setDashboardJSON(parsedData);
+      } catch (error) {
+        console.error("Failed to parse JSON:", error);
+      }
     }
   };
 
@@ -59,15 +65,20 @@ const DynamicDashboard: React.FC = () => {
       {/* JSON Editor */}
       <div className="w-1/4 p-4 bg-gray-800 text-white overflow-auto">
         <h2 className="text-lg font-bold mb-2">Edit JSON Schema</h2>
-        <textarea
-          className="w-full h-[90vh] bg-gray-700 p-2 rounded"
-          value={JSON.stringify(dashboardJSON, null, 2)}
-          onChange={handleJSONChange}
+        <VanillaJsonEditor
+          content={{ json: dashboardJSON }}
+          askToFormat={false}
+          navigationBar={false}
+          onChange={(data) => {
+            handleJSONChange(data);
+          }}
         />
       </div>
 
       {/* Dashboard Layout */}
-      <div className="w-3/4 p-4 grid grid-cols-8 gap-4">
+      <div
+        className={`w-3/4 p-4 grid grid-cols-${dashboardJSON?.totalCols} gap-4 grid-rows-${dashboardJSON?.totalRows}`}
+      >
         {dashboardJSON.widgets.map((widgetItem, index) => {
           const Widget = WidgetMap[widgetItem.widget];
           return (

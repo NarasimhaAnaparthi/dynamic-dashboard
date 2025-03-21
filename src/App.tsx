@@ -1,10 +1,7 @@
-import DynamicDashboard from './components/Dashboard'
+import DynamicDashboard from "./components/Dashboard";
 
 function App() {
-
-  return (
-    <DynamicDashboard/>
-  )
+  return <DynamicDashboard />;
 }
 
-export default App
+export default App;
