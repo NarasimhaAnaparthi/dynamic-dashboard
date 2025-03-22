@@ -24,7 +24,7 @@ const Piechart: React.FC<{ data: number[] }> = ({ data }) => {
       },
     ],
   };
-
+  //@ts-ignore
   return <PieChartComponent ref={chartRef} data={chartData} />;
 };
 
