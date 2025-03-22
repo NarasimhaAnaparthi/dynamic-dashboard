@@ -4,35 +4,38 @@ import VanillaJsonEditor from "./VanillaJsonEditor";
 
 const initialJSON = {
   totalCols: 8,
-  totalRows: 4,
+  totalRows: 8,
   widgets: [
     {
       cols: 2,
-      rows: 6,
+      rows: 3,
       widget: "profile",
       widgetProps: { name: "John Doe", role: "Engineer" },
     },
     {
       cols: 3,
       rows: 3,
-      widget: "statusPieChart",
+      widget: "pieChart",
       widgetProps: { data: [10, 20, 30] },
     },
     {
       cols: 3,
-      rows: 9,
+      rows: 8,
       widget: "timeline",
       widgetProps: { events: ["Task 1", "Task 2"] },
     },
     {
-      cols: 3,
+      cols: 5,
       rows: 3,
       widget: "barChart",
-      widgetProps: { labels: ["Jan", "Feb"], values: [50, 80] },
+      widgetProps: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+        values: [50, 80, 60, 70, 40],
+      },
     },
     {
       cols: 5,
-      rows: 3,
+      rows: 2,
       widget: "heatMap",
       widgetProps: {
         heatData: [
@@ -47,7 +50,7 @@ const initialJSON = {
 const DynamicDashboard: React.FC = () => {
   const [dashboardJSON, setDashboardJSON] = useState(initialJSON);
 
-  const handleJSONChange = (data:any) => {
+  const handleJSONChange = (data: any) => {
     if ("json" in data && data.json) {
       setDashboardJSON(data.json);
     } else if ("text" in data && data.text) {
@@ -64,7 +67,7 @@ const DynamicDashboard: React.FC = () => {
     <div className="flex h-screen">
       {/* JSON Editor */}
       <div className="w-1/4 p-4 bg-gray-800 text-white overflow-auto">
-        <h2 className="text-lg font-bold mb-2">Edit JSON Schema</h2>
+        <h2 className="text-lg font-bold mb-1">Edit JSON Schema</h2>
         <VanillaJsonEditor
           content={{ json: dashboardJSON }}
           askToFormat={false}
@@ -89,7 +92,7 @@ const DynamicDashboard: React.FC = () => {
               {Widget ? (
                 <Widget {...widgetItem.widgetProps} />
               ) : (
-                <p>Unknown Widget</p>
+                <p className="capitalize">{widgetItem.widget} Not Defined</p>
               )}
             </div>
           );
