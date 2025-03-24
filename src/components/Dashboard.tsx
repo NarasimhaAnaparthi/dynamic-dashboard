@@ -29,8 +29,8 @@ const initialJSON = {
       rows: 3,
       widget: "barChart",
       widgetProps: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-        values: [50, 80, 60, 70, 40],
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        values: [50, 80, 60, 70, 40, 59],
       },
     },
     {
