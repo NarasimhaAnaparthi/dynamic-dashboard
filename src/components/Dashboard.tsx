@@ -16,7 +16,7 @@ const initialJSON = {
       cols: 3,
       rows: 3,
       widget: "pieChart",
-      widgetProps: { data: [10, 20, 30] },
+      widgetProps: { data: [10, 20, 30,60] },
     },
     {
       cols: 3,
