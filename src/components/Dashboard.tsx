@@ -16,7 +16,7 @@ const initialJSON = {
       cols: 3,
       rows: 3,
       widget: "pieChart",
-      widgetProps: { data: [10, 20, 30,60] },
+      widgetProps: { data: [10, 20, 30, 60] },
     },
     {
       cols: 3,
@@ -39,8 +39,11 @@ const initialJSON = {
       widget: "heatMap",
       widgetProps: {
         heatData: [
-          [1, 2],
-          [3, 4],
+          { date: "2025-01-10", status: "present", value: 6 },
+          { date: "2025-01-15", status: "absent" },
+          { date: "2025-02-05", status: "present", value: 3 },
+          { date: "2025-02-20", status: "absent" },
+          { date: "2025-03-08", status: "present", value: 7 },
         ],
       },
     },
